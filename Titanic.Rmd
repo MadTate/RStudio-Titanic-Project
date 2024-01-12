@@ -1,0 +1,37 @@
+---
+title: "Titanic"
+author: "Madison Tate"
+date: "9/30/2021"
+output: html_document
+--
+```{r}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+## I want to answer the question of what is the average age of each passenger class.
+
+```{r Frequency Polygon, echo=TRUE}
+ggplot(train, aes(Age, color = Pclass)) +
+ geom_freqpoly(binwidth = 5)
+```
+
+```{r Age By Command, echo=TRUE}
+by(train$Age, train$Pclass, summary)
+```
+
+## From the frequency polygon I can see what age was the most popular for each passenger class. From the by command performed with the data points, I can see that the average age for first class passengers was 36.81, the average age for second class passengers was 29.77, and the average age for third class passengers 25.93. First class seemed to be filled with more older people than young on average, while third class seemed to be filled with more young people than old on average. 
+
+## Now I want to see what each passenger class paid for their ticket, on average.
+
+```{r Boxplot, echo=TRUE}
+ggplot(train, aes(Fare, color = Pclass)) +
+ geom_boxplot() +
+ labs(title = "Fare Paid by Each Passenger Class", x = "Fare (dollars)", y = "Passenger Class") +
+ scale_x_continuous(limits=c(0,300))
+```
+
+```{r Fare By Command, echo=TRUE}
+by(train$Fare, train$Pclass, summary)
+```
+
+## From the boxplots I can see how much each passenger class spent, on average, on a ticket and which class had the most variation in their ticket prices. From the by command I can see specifically the average price of a ticket by passenger class. First class passengers paid $84.15 on average, second class paid $20.66 on average, and third class paid $13.68 on average for a ship ticket.
